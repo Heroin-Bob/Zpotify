@@ -7,6 +7,7 @@ Zpotify is a tool designed to pull the track list data from a given public Spoti
 
 There is no installation needed to run Zpotify! Simply run Zpotify.exe and you'll be prompted with next steps.
 
+Zpotify also requires NO ACCOUNT REGISTRATION! You do not need to log in to Spotify or Zpotify to use this software.
 
 ### Features to-do prior to release
 - [ ] Playlist links from file for easy bulk processing
@@ -16,8 +17,9 @@ There is no installation needed to run Zpotify! Simply run Zpotify.exe and you'l
 - [ ] reformat config file
 
 ### After release plans
-- [ ] CLI version (Zpotify is currently a stand-alone, self contained application. The CLI will provide the same arguments and features but allow for custom scripting via cmd/powershell)
-
+- [ ] CLI version (Zpotify is currently a stand-alone, self contained, no set-up application. The CLI will provide the same arguments and features but allow for custom scripting via cmd/powershell)
+- [ ] Support for other playlist types to support other media player options like iTunes, WinAmp, MusicBee, etc.
+      
 ## Commands
 
 | Command  | Definition |
