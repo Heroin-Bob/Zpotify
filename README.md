@@ -17,7 +17,7 @@ Zpotify also requires NO ACCOUNT REGISTRATION! You do not need to log in to Spot
 - [ ] reformat config file
 
 ### After release plans
-- [ ] CLI version (Zpotify is currently a stand-alone, self contained, no set-up application. The CLI will provide the same arguments and features but allow for custom scripting via cmd/powershell)
+- [ ] CLI version (Zpotify is currently a stand-alone/self contained/portable application. The CLI will provide the same arguments and features but allow for custom scripting via cmd/powershell)
 - [ ] Support for other playlist types to support other media player options like iTunes, WinAmp, MusicBee, etc.
       
 ## Commands
