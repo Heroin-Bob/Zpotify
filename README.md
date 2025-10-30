@@ -28,7 +28,7 @@ Zpotify also requires NO ACCOUNT REGISTRATION! You do not need to log in to Spot
 | <Playlist URL/ID> | Entering one playlist will pull that playlist. Entering multiple playlists seperated by commas will process all entered. |
 | -h/-help | Prints a help screen with this command info  |
 | -p | Prints the path/paths where your music library are read from |
-| -p add `<path>` | Adds a path to a folder to scan for audio files |
+| -p add `<path>` | Adds a path to scan for audio files |
 | -p remove `<path>` | Removes a scan path |
 | -l | Lists the playlists already downloaded and stored in /playlists |
 | exit/quit | Closes the program |
