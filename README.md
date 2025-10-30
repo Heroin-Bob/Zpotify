@@ -14,6 +14,7 @@ Zpotify also requires NO ACCOUNT REGISTRATION! You do not need to log in to Spot
 - [ ] Option to switch to directory archive to speed up checks in the future (a file will be created with a record of your directory which will be referenced instead of scanning your music folder every time it needs to process a playlist making pulling new playlists take as little as 3 seconds)
 - [ ] Switch on/off logging of successful / unsuccessful matches
 - [ ] Store processed playlists in an archive file with counter for respective successful/unsuccessful matches
+- [ ] Improve matching by looking for different versions of tracks and verifying correct version with end user (a track may appear on an album, on a greatest hits, on a rerelease, and on a live recording. User should be prompted to verify which would be ideal.)
 - [ ] reformat config file
 
 ### After release plans
