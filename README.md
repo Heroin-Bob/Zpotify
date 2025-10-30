@@ -7,16 +7,28 @@ Zpotify is a tool designed to pull the track list data from a given public Spoti
 
 There is no installation needed to run Zpotify! Simply run Zpotify.exe and you'll be prompted with next steps.
 
+
+### Features to-do prior to release
+- [ ] Playlist links from file for easy bulk processing
+- [ ] Option to switch to directory archive to speed up checks in the future (a file will be created with a record of your directory which will be referenced instead of scanning your music folder every time it needs to process a playlist making pulling new playlists take as little as 3 seconds)
+- [ ] Switch on/off logging of successful / unsuccessful matches
+- [ ] Store processed playlists in an archive file with counter for respective successful/unsuccessful matches
+- [ ] reformat config file
+
+### After release plans
+- [ ] CLI version (Zpotify is currently a stand-alone, self contained application. The CLI will provide the same arguments and features but allow for custom scripting via cmd/powershell)
+
 ## Commands
-There are only a few commands within Zpotify:
 
-`Playlist URL/ID`   -  Entering one playlist will pull that playlist, however entering multiple playlists seperated by commas will process them all\
-`help`              -  Prints a help screen with this command info  \
-`-p`                -  Prints the path/paths where your music library are read from\
-`-l`                -  Lists the playlists already downloaded and stored in /playlists\
-`exit/quit`         -  Closes the program
-
-Zpotify tries to be as simplistic as possible so options are kept limited.
+| Command  | Definition |
+| ------------- | ------------- |
+| <Playlist URL/ID> | Entering one playlist will pull that playlist. Entering multiple playlists seperated by commas will process all entered. |
+| -h/-help | Prints a help screen with this command info  |
+| -p | Prints the path/paths where your music library are read from |
+| -p add `<path>` | Adds a path to a folder to scan for audio files |
+| -p remove `<path>` | Removes a scan path |
+| -l | Lists the playlists already downloaded and stored in /playlists |
+| exit/quit | Closes the program |
 
 ## How To
 - When you download Zpotify you will simply have an .exe file. It is recommended you make a folder called Zpotify and place this exe in that folder.
@@ -28,8 +40,11 @@ Zpotify tries to be as simplistic as possible so options are kept limited.
 
 ## Inaccuracies and troubleshooting
 By the nature of how people store their music files vs looking for tracks with the correct artist and song names in them, it is likely that at some point a song will be found that is either the wrong version or completely incorrect. It is also possible that the song will exist in your music path, but it isn't found by the application. The most likely culpret for this is how you store your music.\
+\
 When comparing Spotify tracks to files the application does not look at file metadata (this would be wayyyyy too slow to be usable), but rather the directory and file names. If the directory is *../Music/Andrew W.K/Party Hard.mp3* then it will see the artist name in the directory even though it's not part of the file name (and if the artist name is in the file name, that works the same and is perfectly fine). However, if your music is stored as *../Music/3 - Party Hard.mp3*, despite what the metadata reads as, it will not see this track as the one it is looking for.\
-To simplify - If you can't look at your file directory and immediately tell who the artist is and what the song is called - neither can Zpotify.\
+\
+To simplify - **If you can't look at your file path and immediately tell who the artist is and what the song is called - neither can Zpotify**.\
+\
 If you're having issues with your file paths then I recommend MusicBranz Picard to help straighten up your music catalog. Be sure to use a profile setting that will make your directory something similar to *Artist/album/artist - tracknumber. track.ext*. And, while the scanning is really good, I recommend taking your time with it and not try to rush it. Mistakes in renaming your files can happen.
 
 
