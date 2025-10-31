@@ -41,6 +41,9 @@ Zpotify also requires NO ACCOUNT REGISTRATION! You do not need to log in to Spot
 - If you choose to turn on logging in the settings you may also get 2 txt documents sharing the name of your playlist - one to show you what files were successfully found, and another to show you which ones were not found. Use this information to help in building out your playlist and fixing issues.
 - Simply copy and paste the .wpl file wherever your Zune playlists are stored and read by your Zune software and you'll now be able to use it via the desktop app and your Zune player.
 
+## Issue Reporting
+Use the [https://github.com/Heroin-Bob/Zpotify/issues]Issues tab at the top of this github to report any issues with the software.
+
 ## Inaccuracies and troubleshooting
 By the nature of how people store their music files vs looking for tracks with the correct artist and song names in them, it is likely that at some point a song will be found that is either the wrong version or completely incorrect. It is also possible that the song will exist in your music path, but it isn't found by the application. The most likely culpret for this is how you store your music.\
 \
@@ -48,7 +51,28 @@ When comparing Spotify tracks to files the application does not look at file met
 \
 To simplify - **If you can't look at your file path and immediately tell who the artist is and what the song is called - neither can Zpotify**.\
 \
-If you're having issues with your file paths then I recommend MusicBranz Picard to help straighten up your music catalog. Be sure to use a profile setting that will make your directory something similar to *Artist/album/artist - tracknumber. track.ext*. And, while the scanning is really good, I recommend taking your time with it and not try to rush it. Mistakes in renaming your files can happen.
+It is recommended to use MusicBrainz Picard to update your music library. 
+\
+<details>
+
+<summary>More info on recommended settings for MusicBrainz Picard</summary>
+
+## MusicBrainz Picard
+
+To get the best results from your directory scans these are the recommended options (Options > Options) for your music library:
+
+- Under Metadata mark "Convert Unicode puctuation characters to ASCII"
+- Under Tags mark "Clear Existing tags"
+- Under Tags/ID3 choose ID3v2 Version "2.3"
+- Under Cover Art mark "Embed cover images into tags" and "Save cover images as separate files" (leave the file name as "cover")
+- Under File Naming mark "Rename files when saving" then click the dropdown beneath it and choose "Preset 2: [album artist]/[album]/[track #]. [title"
+- Under File Naming/Compatibility mark "Replace non-ASCII characters"
+**optional**
+- Under User Interface mark "Allow selection of multiple directories"
+- Under Advanced mark "Ignore hidden files" and change the "Ignore track duration difference under this number of seconds" to 10
+
+
+</details>
 
 
 
