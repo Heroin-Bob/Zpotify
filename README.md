@@ -35,10 +35,10 @@ Zpotify also requires NO ACCOUNT REGISTRATION! You do not need to log in to Spot
 
 ## How To
 - When you download Zpotify you will simply have an .exe file. It is recommended you make a folder called Zpotify and place this exe in that folder.
-- On first run the Zpotify.exe file will create a new file called zpotify.config. You will need to locate this file and open it in notepad or another text editor (Word is not recommended).
-- Remove everything in this file and add in the full path to your music folder (ie, C:\Users\Test\Music, \\192.168.1.12\Music, etc.). Network paths are supported but they may need to be added via a network drive or network folder. If you have more than one folder to scan, add only one per line.
-- Once this is updated you can now use Zpotify! Open Zpotify.exe again and paste in your first playlist.
-- Zpotify will pull down all the tracks from the playlist, then it will scan your music folder(s) to look for those tracks in your library, then it will create a new folder called Playlists next to your Zpotify files and place in a new .wpl file. This is your playlist file! You'll also get 2 text documents - one to show you what files were successfully found, and another to show you which ones were not found. Use this information to help in building out your playlist and fixing issues.
+- On first run Zpotify will create a new file called zpotify.config in the directory the application is run from. This file can be updated via Zpotify or through the file itself. If you choose to manually update it and something goes wrong with loading it you can always delete the .config file and Zpotify will generate a new one. To view the config options from within Zpotify run `config`. To open the config file from the application run `config -open`. 
+- You will need to update your music folder paths before continuing: Do this by running `-p` to view the current listed directories, then run `-p add <path>` to add a new path to the list. To remove a path run `-p remove <path>`. Paths will be checked at launch for access. Invalid/inaccessible paths will be automatically skipped.
+- Zpotify will pull all the tracks from a provided playlist(s). It will then scan your music folder(s) to look for those tracks in your library, create a new folder called Playlists next to your Zpotify files, and finally place in a new .wpl file. This is your playlist file!
+- If you choose to turn on logging in the settings you may also get 2 txt documents sharing the name of your playlist - one to show you what files were successfully found, and another to show you which ones were not found. Use this information to help in building out your playlist and fixing issues.
 - Simply copy and paste the .wpl file wherever your Zune playlists are stored and read by your Zune software and you'll now be able to use it via the desktop app and your Zune player.
 
 ## Inaccuracies and troubleshooting
