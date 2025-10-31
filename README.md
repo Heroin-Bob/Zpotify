@@ -15,7 +15,7 @@ Zpotify also requires NO ACCOUNT REGISTRATION! You do not need to log in to Spot
 - [ ] Switch on/off logging of successful / unsuccessful matches
 - [ ] Store processed playlists in an archive file with counter for respective successful/unsuccessful matches
 - [ ] Improve matching by looking for different versions of tracks and verifying correct version with end user (a track may appear on an album, on a greatest hits, on a rerelease, and on a live recording. User should be prompted to verify which would be ideal.)
-- [ ] reformat config file
+- [x] reformat config file
 
 ### After release plans
 - [ ] CLI version (Zpotify is currently a stand-alone/self contained/portable application. The CLI will provide the same arguments and features but allow for custom scripting via cmd/powershell)
