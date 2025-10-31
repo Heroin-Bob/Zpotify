@@ -50,6 +50,11 @@ Zpotify does not have the functionality to pull all the playlists from a creator
 
 To get this head to [this page](https://github.com/Heroin-Bob/Zpotify/blob/main/Spotify_Playlist_Links_Bookmarklet.js) and click the "Copy raw file" button on the right-hand side. Then make a new bookmark, set the url as the copied text, and save!
 
+Demo:
+https://github.com/user-attachments/assets/284dae5b-8bf9-4013-8fd7-e74d20a68910
+
+
+
 ## Issue Reporting
 Use the [Issues](https://github.com/Heroin-Bob/Zpotify/issues) tab at the top of this github to report any issues with the software.
 
