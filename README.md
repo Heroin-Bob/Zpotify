@@ -81,6 +81,7 @@ To get the best results from your directory scans these are the recommended opti
 - Under Cover Art mark "Embed cover images into tags" and "Save cover images as separate files" (leave the file name as "cover")
 - Under File Naming mark "Rename files when saving" then click the dropdown beneath it and choose "Preset 2: [album artist]/[album]/[track #]. [title"
 - Under File Naming/Compatibility mark "Replace non-ASCII characters"
+  
 **optional**
 - Under User Interface mark "Allow selection of multiple directories"
 - Under Advanced mark "Ignore hidden files" and change the "Ignore track duration difference under this number of seconds" to 10
