@@ -48,7 +48,7 @@ There are 2 ways you can process multiple playlists with Zpotify:
 
 Zpotify does not have the functionality to pull all the playlists from a creator or page, but I have developed a bookmarklet ([more info on bookmarklets](https://www.bookmarkllama.com/blog/bookmarklets?#how-do-you-add-bookmarklets:~:text=Method%202%3A%20Creating%20Manually)) which pulls all the playlists from a page. 
 
-To get this head to (this page)[https://github.com/Heroin-Bob/Zpotify/blob/main/Spotify_Playlist_Links_Bookmarklet] and click the "Copy raw file" button on the right-hand side. Then make a new bookmark, set the url as the copied text, and save!
+To get this head to [this page](https://github.com/Heroin-Bob/Zpotify/blob/main/Spotify_Playlist_Links_Bookmarklet.js) and click the "Copy raw file" button on the right-hand side. Then make a new bookmark, set the url as the copied text, and save!
 
 ## Issue Reporting
 Use the [Issues](https://github.com/Heroin-Bob/Zpotify/issues) tab at the top of this github to report any issues with the software.
