@@ -40,6 +40,16 @@ Zpotify also requires NO ACCOUNT REGISTRATION! You do not need to log in to Spot
 - If you choose to turn on logging in the settings you may also get 2 txt documents sharing the name of your playlist - one to show you what files were successfully found, and another to show you which ones were not found. Use this information to help in building out your playlist and fixing issues.
 - Simply copy and paste the .wpl file wherever your Zune playlists are stored and read by your Zune software and you'll now be able to use it via the desktop app and your Zune player.
 
+### Bulk playlists
+There are 2 ways you can process multiple playlists with Zpotify:
+
+1. You can copy and paste the urls of each playlist into a comma-separated string of urls (ie. playlisturl1,playlisturl2,playlisturl3,etc)
+2. You can create a .txt file with each playlist on a separate line then call this playlist within Zpotify
+
+Zpotify does not have the functionality to pull all the playlists from a creator or page, but I have developed a bookmarklet ([more info on bookmarklets](https://www.bookmarkllama.com/blog/bookmarklets?#how-do-you-add-bookmarklets:~:text=Method%202%3A%20Creating%20Manually)) which pulls all the playlists from a page. 
+
+To get this head to (this page)[https://github.com/Heroin-Bob/Zpotify/blob/main/Spotify_Playlist_Links_Bookmarklet] and click the "Copy raw file" button on the right-hand side. Then make a new bookmark, set the url as the copied text, and save!
+
 ## Issue Reporting
 Use the [Issues](https://github.com/Heroin-Bob/Zpotify/issues) tab at the top of this github to report any issues with the software.
 
