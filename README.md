@@ -41,7 +41,7 @@ Zpotify also requires NO ACCOUNT REGISTRATION! You do not need to log in to Spot
 - Simply copy and paste the .wpl file wherever your Zune playlists are stored and read by your Zune software and you'll now be able to use it via the desktop app and your Zune player.
 
 ## Issue Reporting
-Use the [https://github.com/Heroin-Bob/Zpotify/issues]Issues tab at the top of this github to report any issues with the software.
+Use the [Issues](https://github.com/Heroin-Bob/Zpotify/issues) tab at the top of this github to report any issues with the software.
 
 ## Inaccuracies and troubleshooting
 By the nature of how people store their music files vs looking for tracks with the correct artist and song names in them, it is likely that at some point a song will be found that is either the wrong version or completely incorrect. It is also possible that the song will exist in your music path, but it isn't found by the application. The most likely culpret for this is how you store your music.\
