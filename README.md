@@ -49,10 +49,10 @@ By the nature of how people store their music files vs looking for tracks with t
 \
 When comparing Spotify tracks to files the application does not look at file metadata (this would be wayyyyy too slow to be usable), but rather the directory and file names. If the directory is *../Music/Andrew W.K/Party Hard.mp3* then it will see the artist name in the directory even though it's not part of the file name (and if the artist name is in the file name, that works the same and is perfectly fine). However, if your music is stored as *../Music/3 - Party Hard.mp3*, despite what the metadata reads as, it will not see this track as the one it is looking for.\
 \
-To simplify - **If you can't look at your file path and immediately tell who the artist is and what the song is called - neither can Zpotify**.\
+To simplify - **If you can't look at your file path and immediately tell who the artist is and what the song is called - neither can Zpotify**.
 \
 It is recommended to use MusicBrainz Picard to update your music library. 
-\
+
 <details>
 
 <summary>More info on recommended settings for MusicBrainz Picard</summary>
