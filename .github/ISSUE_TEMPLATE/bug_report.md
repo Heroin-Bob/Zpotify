@@ -7,6 +7,9 @@ assignees: Heroin-Bob
 
 ---
 
+**Software version**
+Include the version of Zpotify you are using. (If you are not on it try downloading the most recent version before submitting a bug report)
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
