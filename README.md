@@ -10,7 +10,7 @@ There is no installation needed to run Zpotify! Simply run Zpotify.exe and you'l
 Zpotify also requires NO ACCOUNT REGISTRATION! You do not need to log in to Spotify or Zpotify to use this software.
 
 ### Features to-do prior to release
-- [ ] Playlist links from file for easy bulk processing
+- [x] Playlist links from file for easy bulk processing
 - [ ] Switch on/off logging of successful / unsuccessful matches
 - [ ] Store processed playlists in an archive file with counter for respective successful/unsuccessful matches
 - [ ] Improve matching by looking for different versions of tracks and verifying correct version with end user (a track may appear on an album, on a greatest hits, on a rerelease, and on a live recording. User should be prompted to verify which would be ideal.)
