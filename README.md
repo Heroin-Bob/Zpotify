@@ -11,7 +11,7 @@ Zpotify also requires NO ACCOUNT REGISTRATION! You do not need to log in to Spot
 
 ### Features to-do prior to release
 - [x] Playlist links from file for easy bulk processing
-- [ ] Switch on/off logging of successful / unsuccessful matches
+- [x] Switch on/off logging of successful / unsuccessful matches
 - [ ] Store processed playlists in an archive file with counter for respective successful/unsuccessful matches
 - [ ] Improve matching by looking for different versions of tracks and verifying correct version with end user (a track may appear on an album, on a greatest hits, on a rerelease, and on a live recording. User should be prompted to verify which would be ideal.)
 - [x] reformat config file
