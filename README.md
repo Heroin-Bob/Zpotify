@@ -25,11 +25,18 @@ Zpotify also requires NO ACCOUNT REGISTRATION! You do not need to log in to Spot
 | Command  | Definition |
 | ------------- | ------------- |
 | <Playlist URL/ID> | Entering one playlist will pull that playlist. Entering multiple playlists seperated by commas will process all entered. |
-| -h/-help | Prints a help screen with this command info  |
+| help | Prints a help screen with this command info  |
+| config | Display the config file in the console |
+| config -open | Open the config file |
+| config -logmatched | Toggle whether to create a log file with a list of matched tracks from a playlist |
+| config -logunmatched | Toggle whether to create a log file with a list of unmatched tracks from a playlist |
+| config -logplaylists | Toggle logging processed playlists |
+| -l | Lists the playlists already downloaded and stored in /playlists |
 | -p | Prints the path/paths where your music library are read from |
 | -p add `<path>` | Adds a path to scan for audio files |
 | -p remove `<path>` | Removes a scan path |
-| -l | Lists the playlists already downloaded and stored in /playlists |
+| -f `<path>` | Retrieves a list of playlists from a file |
+| clear | Clear all the text from the console |
 | exit/quit | Closes the program |
 
 ## How To
@@ -69,7 +76,7 @@ It is recommended to use MusicBrainz Picard to update your music library.
 
 <details>
 
-<summary>More info on recommended settings for MusicBrainz Picard</summary>
+**<summary>More info on recommended settings for MusicBrainz Picard</summary>**
 
 ## MusicBrainz Picard
 
