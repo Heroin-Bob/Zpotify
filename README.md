@@ -35,6 +35,7 @@ Zpotify also requires NO ACCOUNT REGISTRATION! You do not need to log in to Spot
 | -p | Prints the path/paths where your music library are read from |
 | -p add `<path>` | Adds a path to scan for audio files |
 | -p remove `<path>` | Removes a scan path |
+| -p remove all | Removes all scan paths |
 | -f `<path>` | Retrieves a list of playlists from a file |
 | clear | Clear all the text from the console |
 | exit/quit | Closes the program |
