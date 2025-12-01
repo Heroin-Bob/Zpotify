@@ -59,8 +59,8 @@ public class Program
 
         Console.Title = "Zpotify v1.1";
 
-        var clientId = "f1f74e12dd8a4785ad3eaf9798fd270d";
-        var clientSecret = "e2020e6febdc49919a8e8e274e841816";
+        var clientId = "VOID";
+        var clientSecret = "VOID";
 
 
         Console.WriteLine("                     ::::::::::                   ");
@@ -1271,3 +1271,4 @@ public class Program
     }
 
 }
+
