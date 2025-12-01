@@ -3,7 +3,10 @@ using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks; 
+using System.Threading.Tasks;
+using TagLib;
+using TagLibFile = TagLib.File;
+using File = System.IO.File;
 
 public class Config
 {
@@ -15,12 +18,12 @@ public class Config
 
 public static class Globals
 {
-    public static Config config { get; set; } = new Config() 
+    public static Config config { get; set; } = new Config()
     {
         Paths = new List<string>(["C:/Users/Public/Music", @"\\Network\Share\Path"]),
-        LogSuccessfulMatches=false,
-        LogUnsuccessfulMatches=false,
-        LogProcessedPlaylists=false
+        LogSuccessfulMatches = false,
+        LogUnsuccessfulMatches = false,
+        LogProcessedPlaylists = false
     };
     public static string playlistInput = "";
     public static string configString = "";
@@ -54,10 +57,10 @@ public class Program
     public static async Task Main(string[] args)
     {
 
-        Console.Title = "Zpotify v1.0";
+        Console.Title = "Zpotify v1.1";
 
-        var clientId = ""; //Omitted for security
-        var clientSecret = ""; //Omitted for security
+        var clientId = "f1f74e12dd8a4785ad3eaf9798fd270d";
+        var clientSecret = "e2020e6febdc49919a8e8e274e841816";
 
 
         Console.WriteLine("                     ::::::::::                   ");
@@ -139,16 +142,12 @@ public class Program
         {
             Environment.Exit(0);
         }
-        Globals.playlistInput = ""; 
-        await Main(args); //yeah this is bad practice but I don't want to wrap this all up in a loop. Just don't loop it 10,000 times and you'll be fine.
+        Globals.playlistInput = "";
+        await Main(args);
 
     }
     private delegate Task CommandHandler(string commandKey, string arg);
 
-    /// <summary>
-    /// Dictionary to map command keys (single word or two words, e.g., "help" or "-p add") to handlers.
-    /// The handler receives the full command key and the remaining argument string.
-    /// </summary>
     private static readonly Dictionary<string, CommandHandler> CommandHandlers = new()
     {
         { "help", async (key, arg) =>
@@ -230,65 +229,6 @@ public class Program
                 }
             }
         },
-
-
-
-        /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        Hi!
-
-        You're about to spoil a bunch of easter eggs.
-        
-        I'd like to ask you to not share them with anyone, ok?
-        Not that it's some major secret, but let people find it for themselves, ya know?
-        There is a way you can solve the big easter egg without looking here (it's not that well hidden...) :)
-
-
-        If you want to talk about them in the r/zune subreddit or the zune discord, mention Big Foot and I'll know.
-
-        Anyway, thanks for using the software and if you have any issues please let me know in the issues tab here on GitHub!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        */
-
         { "why", async (key, arg) =>
             {
                 var whyStr = "I'm honestly just sick of smart phones.";
@@ -454,7 +394,7 @@ public class Program
 
         foreach (var link in filePaths)
         {
-            outStr += link + ',';   
+            outStr += link + ',';
         }
         outStr = outStr.Trim();
         outStr = outStr.Substring(0, outStr.Length - 1);
@@ -472,9 +412,6 @@ public class Program
         WriteColorLine("Note: network paths will display as the program sees them, not as they are read. Extra \\ characters is expected.\nIt is recommended to use -p to view and update your paths.\n", ConsoleColor.Cyan);
         WriteColorLine(configStr, ConsoleColor.Yellow);
     }
-    /// <summary>
-    /// Checks for a command key and its argument in the dictionary.
-    /// </summary>
     private static async Task<string> waitForCommand()
     {
         bool exitloop = false;
@@ -554,7 +491,8 @@ public class Program
                     if (Globals.playlistInput.Contains("-f"))
                     {
                         await handlerSingleWord(commandKey, argument);
-                    } else
+                    }
+                    else
                     {
                         await handlerSingleWord(commandKey, argument);
                         Globals.playlistInput = "";
@@ -576,7 +514,7 @@ public class Program
             {
                 WriteColorLine($"'{Globals.playlistInput}' is not a recognized command or valid Spotify URL/ID. Try again.", ConsoleColor.Red);
                 Console.WriteLine("\n");
-                Globals.playlistInput="";
+                Globals.playlistInput = "";
                 continue;
             }
         }
@@ -599,9 +537,6 @@ public class Program
         return pathsStr;
     }
 
-    /// <summary>
-    /// Displays the paths from the config file. (Original -p behavior)
-    /// </summary>
     private static async Task DisplayConfigPaths()
     {
         ReadOrCreateConfigFile();
@@ -619,9 +554,6 @@ public class Program
         await Task.CompletedTask;
     }
 
-    /// <summary>
-    /// Adds a new path to the config file if it doesn't already exist.
-    /// </summary>
     private static async Task AddPathToConfigFile(string path)
     {
         var normalizedPath = path.Trim().TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
@@ -651,9 +583,6 @@ public class Program
         }
     }
 
-    /// <summary>
-    /// Removes a path from the config file.
-    /// </summary>
     private static async Task RemovePathFromConfigFile(string path)
     {
         if (path.ToLower() == "all")
@@ -680,15 +609,12 @@ public class Program
         }
     }
 
-    /// <summary>
-    /// Reads the config file, creating it with default values if it doesn't exist.
-    /// This function implements the logic to parse key-value pairs, including the array format for Paths.
-    /// </summary>
     public static Config ReadOrCreateConfigFile()
     {
         var configs = new List<string>();
 
-        if (!File.Exists(ConfigFileName)){
+        if (!File.Exists(ConfigFileName))
+        {
             WriteColorLine($"Config file '{ConfigFileName}' not found. Creating default...\n", ConsoleColor.Red);
             string userPath = "";
             while (!Path.Exists(userPath))
@@ -723,7 +649,7 @@ public class Program
         var fileText = File.ReadAllText(ConfigFileName);
         var deserialized = JsonSerializer.Deserialize<Config>(fileText);
         string deserialStr = fileText;
-        deserialStr = deserialStr.Replace("\\\\", "\\");        
+        deserialStr = deserialStr.Replace("\\\\", "\\");
         Globals.config = deserialized;
         Globals.configString = deserialStr;
         return Globals.config;
@@ -772,7 +698,7 @@ public class Program
             .ToList();
 
         await OutputMatchedTracks(matchedTracks, sanitizedPlaylistName);
-        await OutputUnmatchedTracks(unmatchedTracks, sanitizedPlaylistName); 
+        await OutputUnmatchedTracks(unmatchedTracks, sanitizedPlaylistName);
         await OutputWplPlaylist(matchedTracks, playlistName, sanitizedPlaylistName);
     }
 
@@ -817,81 +743,109 @@ public class Program
     }
 
     private static List<(string SpotifyArtist, string SpotifyTrack, string FilePath)> MatchTracks(
-        List<(string Artist, string Name)> spotifyTracks,
-        string folderPath,
-        HashSet<string> foundSpotifyTracks)
+    List<(string Artist, string Name)> spotifyTracks,
+    string folderPath,
+    HashSet<string> foundSpotifyTracks)
     {
         var matchedTracks = new List<(string, string, string)>();
 
-        Console.WriteLine("Audio file types compatible with Zune Software: .mp3, .aac, .mp4, .m4b, .mov, .wma");
+        WriteColorLine("Audio file types compatible with Zune Software: .mp3, .aac, .mp4, .m4b, .mov, .wma", ConsoleColor.White);
         Console.WriteLine("Scanning directory for files...");
         var filePaths = Directory.GetFiles(folderPath, "*.*", SearchOption.AllDirectories)
             .Where(s => s.EndsWith(".mp3") || s.EndsWith(".aac") || s.EndsWith(".mp4") || s.EndsWith(".m4b") || s.EndsWith(".mov") || s.EndsWith(".wma"))
             .ToList();
 
         Console.WriteLine($"\rFound {filePaths.Count} local files. Starting match process...");
-        
-        int totalTracks = spotifyTracks.Count;
+
         int tracksProcessed = 0;
 
         foreach (var spotifyTrack in spotifyTracks)
         {
             tracksProcessed++;
             Console.Write($"\r{tracksProcessed}/{spotifyTracks.Count}");
-            List<string> matchedFiles = [];
-            foreach (var file in filePaths) {
-                
-                string spotifyTrackName = CleanString(spotifyTrack.Name);
-                string spotifyArtist = CleanString(spotifyTrack.Artist).ToLower();
-                string matchFile = CleanString(file);
-                if (matchFile.Contains(spotifyTrackName))
+
+            var possibleFileMatches = new List<string>();
+
+            string normalizedSpotifyName = NormalizeSpotifyTrackName(spotifyTrack.Name);
+            string spotifyTrackName = CleanString(normalizedSpotifyName);
+            string spotifyArtist = CleanString(spotifyTrack.Artist).ToLower();
+
+            bool requiresAcousticInPath = spotifyTrack.Name.IndexOf("acoustic", StringComparison.OrdinalIgnoreCase) >= 0;
+            bool requiresLiveInPath = spotifyTrack.Name.IndexOf("live", StringComparison.OrdinalIgnoreCase) >= 0;
+
+            foreach (var file in filePaths)
+            {
+                string fileNameNoExt = Path.GetFileNameWithoutExtension(file) ?? "";
+                string matchFileName = CleanString(fileNameNoExt);
+
+                string matchFileFullPathCleaned = CleanString(file);
+
+                bool meetsAcousticRequirement = !requiresAcousticInPath || file.IndexOf("acoustic", StringComparison.OrdinalIgnoreCase) >= 0;
+                bool meetsLiveRequirement = !requiresLiveInPath || file.IndexOf("live", StringComparison.OrdinalIgnoreCase) >= 0;
+
+                if (matchFileFullPathCleaned.Contains(spotifyArtist) && matchFileName.Contains(spotifyTrackName)
+                    && meetsAcousticRequirement && meetsLiveRequirement)
                 {
-                    if (matchFile.Contains(spotifyArtist))
-                    {
-                        matchedFiles.Add(file);
-                    }
+                    possibleFileMatches.Add(file);
                 }
             }
+
+            if (possibleFileMatches.Count > 1)
+            {
+                possibleFileMatches = FilterMatchesByVersion(possibleFileMatches, spotifyTrack.Name);
+
+                if (possibleFileMatches.Count > 1)
+                {
+                    possibleFileMatches = FilterMatchesByTag(possibleFileMatches, spotifyTrack.Artist, spotifyTrack.Name);
+                }
+            }
+
+
             var keptFile = "";
-            if (matchedFiles.Count > 1) {
+
+            if (possibleFileMatches.Count == 1)
+            {
+                keptFile = possibleFileMatches[0];
+            }
+            else if (possibleFileMatches.Count > 1)
+            {
                 WriteColorLine($"\nMultiple files were found for {spotifyTrack.Artist} - {spotifyTrack.Name}. Choose which one to use:", ConsoleColor.Cyan);
                 int matchCount = 1;
-                foreach (var match in matchedFiles)
+                foreach (var match in possibleFileMatches)
                 {
                     WriteColorLine($"{matchCount}: {match}", ConsoleColor.Yellow);
                     matchCount++;
                 }
                 WriteColorLine($"0: None", ConsoleColor.Yellow);
                 Console.WriteLine("");
-                Console.Write("Selection: ");
+
                 int selection = 0;
-                while (!int.TryParse(Console.ReadLine(), out selection))
+                Console.Write("Selection: ");
+                while (!int.TryParse(Console.ReadLine(), out selection) || selection < 0 || selection > possibleFileMatches.Count)
                 {
                     Console.WriteLine("Invalid input. Please enter a valid number:");
+                    Console.Write("Selection: ");
                 }
+
                 if (selection == 0)
                 {
                     keptFile = "none";
-                }else
-                {
-                    keptFile = matchedFiles[selection - 1];
                 }
-
+                else
+                {
+                    keptFile = possibleFileMatches[selection - 1];
+                }
             }
-            if (matchedFiles.Count == 1)
-            {
-                matchedTracks.Add((spotifyTrack.Artist, spotifyTrack.Name, matchedFiles[0]));
-                foundSpotifyTracks.Add(spotifyTrack.Name + spotifyTrack.Artist);
-            } else if (!String.IsNullOrEmpty(keptFile) && keptFile != "none")
+
+            if (!String.IsNullOrEmpty(keptFile) && keptFile != "none")
             {
                 matchedTracks.Add((spotifyTrack.Artist, spotifyTrack.Name, keptFile));
                 foundSpotifyTracks.Add(spotifyTrack.Name + spotifyTrack.Artist);
-            } else if ( keptFile == "none")
+            }
+            else if (keptFile == "none" || possibleFileMatches.Count == 0)
             {
                 WriteColorLine($"Track {spotifyTrack.Artist} - {spotifyTrack.Name} skipped.\n", ConsoleColor.Cyan);
             }
-
-                matchedFiles.Clear();
         }
 
         WriteColorLine($"\rMatching complete! Found {matchedTracks.Count} matches in this folder.             ", ConsoleColor.Green);
@@ -899,10 +853,160 @@ public class Program
         return matchedTracks;
     }
 
+    private static List<string> FilterMatchesByVersion(List<string> potentialMatches, string spotifyTrackName)
+    {
+        var filteredMatches = new List<string>(potentialMatches);
+
+        bool spotifyIsAcoustic = spotifyTrackName.IndexOf("acoustic", StringComparison.OrdinalIgnoreCase) >= 0;
+        bool spotifyIsLive = spotifyTrackName.IndexOf("live", StringComparison.OrdinalIgnoreCase) >= 0;
+
+        var keepList = new List<string>();
+
+        foreach (var filePath in filteredMatches)
+        {
+            bool fileIsAcoustic = filePath.IndexOf("acoustic", StringComparison.OrdinalIgnoreCase) >= 0;
+            bool fileIsLive = filePath.IndexOf("live", StringComparison.OrdinalIgnoreCase) >= 0;
+
+            if (spotifyIsAcoustic)
+            {
+                if (fileIsAcoustic)
+                {
+                    keepList.Add(filePath);
+                }
+            }
+            else
+            {
+                if (!fileIsAcoustic)
+                {
+                    if (spotifyIsLive)
+                    {
+                        if (fileIsLive)
+                        {
+                            keepList.Add(filePath);
+                        }
+                    }
+                    else
+                    {
+                        if (!fileIsLive)
+                        {
+                            keepList.Add(filePath);
+                        }
+                    }
+                }
+            }
+        }
+
+        if (potentialMatches.Count > keepList.Count)
+        {
+            WriteColorLine($"\nReduced {potentialMatches.Count} duplicate matches to {keepList.Count} by filtering versions ('Acoustic'/'Live').", ConsoleColor.DarkYellow);
+        }
+
+        if (keepList.Count == 0 && potentialMatches.Count > 0)
+        {
+            return potentialMatches;
+        }
+
+        return keepList;
+    }
+
+
+    private static List<string> FilterMatchesByTag(
+    List<string> potentialMatches,
+    string spotifyArtist,
+    string spotifyTrackName)
+    {
+        var filteredMatches = new List<string>();
+
+        string normalizedSpotifyName = NormalizeSpotifyTrackName(spotifyTrackName);
+
+        string targetArtist = CleanString(spotifyArtist).ToLower();
+        string targetTrack = CleanString(normalizedSpotifyName);
+
+        foreach (var filePath in potentialMatches)
+        {
+            try
+            {
+                using (var file = TagLibFile.Create(filePath))
+                {
+                    string fileArtist = file.Tag.Performers.FirstOrDefault() ?? "";
+                    string fileTitle = file.Tag.Title ?? "";
+
+                    string cleanFileArtist = CleanString(fileArtist).ToLower();
+                    string cleanFileTitle = CleanString(fileTitle);
+
+                    bool artistMatch = cleanFileArtist.Contains(targetArtist);
+
+                    bool titleMatch = cleanFileTitle.Contains(targetTrack) || targetTrack.Contains(cleanFileTitle);
+
+                    if (artistMatch && titleMatch)
+                    {
+                        filteredMatches.Add(filePath);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nWarning: Could not read tags for file {filePath}. Error: {ex.Message}");
+            }
+        }
+
+        if (potentialMatches.Count > 1)
+        {
+            WriteColorLine($"\nReduced {potentialMatches.Count} potential matches to {filteredMatches.Count} using ID3 tag filtering.", ConsoleColor.DarkYellow);
+        }
+
+        return filteredMatches;
+    }
 
     private static string CleanString(string input)
     {
-        return Regex.Replace(input, "[^a-zA-Z0-9 ]", "").ToLower().Replace("the", "").Trim();
+        string normalized = input.Normalize(NormalizationForm.FormD);
+        var sb = new StringBuilder();
+        foreach (char c in normalized)
+        {
+            if (char.IsLetterOrDigit(c) || c == ' ')
+            {
+                sb.Append(c);
+            }
+            else if (System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c) == System.Globalization.UnicodeCategory.SpacingCombiningMark)
+            {
+                continue;
+            }
+        }
+        string cleanInput = sb.ToString();
+
+        if (!Regex.IsMatch(cleanInput, "[a-zA-Z0-9]"))
+        {
+            return input.Trim().ToLower();
+        }
+
+        cleanInput = cleanInput.ToLower()
+                               .Replace("the", "")
+                               .Replace("&", "and")
+                               .Trim();
+
+        cleanInput = Regex.Replace(cleanInput, @"[^a-z0-9 ]", "");
+
+        cleanInput = Regex.Replace(cleanInput, @"\b(and)\b", " ");
+        cleanInput = Regex.Replace(cleanInput, @"\s+", " ").Trim();
+
+        return cleanInput;
+    }
+
+    private static string NormalizeSpotifyTrackName(string trackName)
+    {
+        string cleaned = trackName;
+
+        string pattern = @"\s*(-|\/)\s*(\d{4})?\s*(re-?master(ed)?|remaster(ed)|remastered|re-mastered|version|release|edit|mix|live|explicit|single( ?version)?|original|mono|stereo|album|radio)\s*(\d{4})?\s*(\s*(-|\/)\s*(\d{4})?)*\s*";
+        cleaned = Regex.Replace(cleaned, pattern, " ", RegexOptions.IgnoreCase).Trim();
+
+        string metadataInBracketsPattern = @"\s*(\(|\[).*?(\d{4}|\b(re-?master(ed)?|remaster(ed)|remastered|re-mastered|version|release|edit|mix|live|explicit|single|original)\b).*?(\)|\])\s*";
+        cleaned = Regex.Replace(cleaned, metadataInBracketsPattern, " ", RegexOptions.IgnoreCase).Trim();
+
+        cleaned = Regex.Replace(cleaned, @"\s*(\(|\[)[^)]*(\)|])\s*", " ", RegexOptions.IgnoreCase).Trim();
+        cleaned = Regex.Replace(cleaned, @"\s+", " ").Trim();
+
+        return cleaned;
     }
 
     private static string SanitizeFileName(string playlistName)
@@ -921,8 +1025,8 @@ public class Program
     {
         if (matchedTracks.Any())
         {
-           
-            
+
+
             var lines = matchedTracks.Select(t => $"{t.SpotifyArtist} | {t.SpotifyTrack} | {t.FilePath}");
             Directory.CreateDirectory(PlaylistsFolder);
             Console.WriteLine($"\nSuccessfully found {matchedTracks.Count} matches!");
@@ -954,7 +1058,7 @@ public class Program
                 var outputFileName = Path.Combine(PlaylistsFolder, $"{sanitizedPlaylistName}-unmatched.txt");
                 await File.WriteAllLinesAsync(outputFileName, lines);
                 Console.WriteLine($"\nSuccessfully wrote {unmatchedTracks.Count} unmatched tracks to {outputFileName}");
-            } 
+            }
         }
         else
         {
@@ -965,10 +1069,10 @@ public class Program
     private static string EscapeXmlAttribute(string value)
     {
         return value.Replace("&", "&amp;")
-                    .Replace("<", "&lt;")
-                    .Replace(">", "&gt;")
-                    .Replace("\"", "&quot;")
-                    .Replace("'", "&apos;");
+            .Replace("<", "&lt;")
+            .Replace(">", "&gt;")
+            .Replace("\"", "&quot;")
+            .Replace("'", "&apos;");
     }
 
     private static async Task OutputWplPlaylist(
